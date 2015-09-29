@@ -11,57 +11,78 @@
 using namespace std;
 
 int ** matric(int** matrica1,int** matrica2,int n, int m, int k);
-void show(int** matrica, int n1, int n2);
+void assert(int** matrica1, int** matrica2, int ** test, int n, int m, int k);
 
 int main()
 {
-    int** matrica1 = new int* [3];
-    for (int i = 0; i < 3; i++)
-    {
-        matrica1[i] = new int [2];
-        
-    }
-    cout << "введите матрицу 1" << endl;
-    for (int er = 0; er < 3; er++)
-    {
-        for (int er1 = 0; er1 < 2; er1++)
-        {
-            
-            cin >> matrica1[er][er1];
-           
-        }
-        
-    }
-  //  show(matrica1, 3, 2);
+int ** a1;
+	a1 = new int*[2]; 
+	a1[0] = new int[2]; 
+	a1[0][0] = 1;   
+	a1[0][1] = 0;    
+	a1[1] = new int[2];     
+	a1[1][0] = 0;   
+	a1[1][1] = 1;
+	int ** b1;
+	b1 = new int*[2];
+	b1[0] = new int[2];
+	b1[0][0] = 1;
+	b1[0][1] = 0;
+	b1[1] = new int[2];
+	b1[1][0] = 0;
+	b1[1][1] = 1;
+	int ** test1;
+	test1 = new int*[2];
+	test1[0] = new int[2];
+	test1[0][0] = 1;
+	test1[0][1] = 0;
+	test1[1] = new int[2];
+	test1[1][0] = 0;
+	test1[1][1] = 1;
+	int ** a2;
+	a2 = new int*[2];
+	a2[0] = new int[3];
+	a2[0][0] = 1;
+	a2[0][1] = 3;
+	a2[0][2] = 2;
+	a2[1] = new int[3];
+	a2[1][0] = 0;
+	a2[1][1] = 4;
+	a2[1][2] = -1;
+	int ** b2;
+	b2 = new int*[3];
+	b2[0] = new int[4];
+	b2[0][0] = 2;
+	b2[0][1] = 0;
+	b2[0][2] = -1;
+	b2[0][3] = 1;
+	b2[1] = new int[4];
+	b2[1][0] = 3;
+	b2[1][1] = -2;
+	b2[1][2] = 1;
+	b2[1][3] = 2;
+	b2[2] = new int[4];
+	b2[2][0] = 0;
+	b2[2][1] = 1;
+	b2[2][2] = 2;
+	b2[2][3] = 3;
+	int ** test2;
+	test2 = new int*[2];
+	test2[0] = new int[4];
+	test2[0][0] = 11;
+	test2[0][1] = -4;
+	test2[0][2] = 6;
+	test2[0][3] = 13;
+	test2[1] = new int[4];
+	test2[1][0] = 12;
+	test2[1][1] = -9;
+	test2[1][2] = 2;
+	test2[1][3] = 5;
 
-    int** matrica2  = new int* [2];
-  
-    for (int i = 0; i < 2; i++)
-    {
-        matrica2[i] = new int [4];
-        
-    }
-    cout<<"введите матрицу 2"<<endl;
-    for (int er = 0; er < 2; er++)
-    {
-        for (int er1 = 0; er1 < 4; er1++)
-        {
-            
-            cin>>matrica2[er][er1];
+	assert(a1, b1, test1, 2, 2, 2);
+	assert(a2, b2, test2, 2, 3, 4);
 
-        }
-    }
-  //  show(matrica2, 2, 4);
-    int** result = matric(matrica1, matrica2, 3, 2, 4);
-    for (int er = 0; er < 3; er++)
-    {
-        for (int er1 = 0; er1 < 4; er1++)
-        {
-            cout<<result[er][er1]<<" ";
-        }
-        cout<<endl;
-    }
-
+	return 0;
 }
 
 int ** matric(int** matrica1,int** matrica2,int n, int m,int k)
@@ -87,14 +108,15 @@ int ** matric(int** matrica1,int** matrica2,int n, int m,int k)
     }
     return result;
 }
-void show(int** matrica, int n1, int n2)
+void assert(int** matrica1, int** matrica2, int ** test, int n, int m, int k)
 {
-    for (int er = 0; er < n1; er++)
-    {
-        for (int er1 = 0; er1 < n2; er1++)
-        {
-            cout<<matrica[er][er1]<<" ";
-        }
-        cout<<endl;
-    }
+	int ** result = matric(matrica1, matrica2, n, m, k);
+	int w = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < k; j++) {
+			if (result[i][j] == test[i][j]) w = w + 1;
+		}
+	}
+	if (w == k*n) { cout << "OK" << endl; }
+	else { cout << "FAIL" << endl; }
 }
